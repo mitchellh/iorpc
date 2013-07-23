@@ -1,7 +1,8 @@
 # iorpc
 
 iorpc is a Go library for serving and accessing `io` interfaces across
-`net/rpc` connections.
+`net/rpc` connections. It currently allows serving and accessing both `io.Reader`
+and `io.Writer` implementations.
 
 ## Installation
 
