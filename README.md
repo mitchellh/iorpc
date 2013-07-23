@@ -4,6 +4,12 @@ iorpc is a Go library for serving and accessing `io` interfaces across
 `net/rpc` connections. It currently allows serving and accessing both `io.Reader`
 and `io.Writer` implementations.
 
+This library is useful if you're serving a single `io.Reader` or
+`io.Writer` to multiple clients. If you're serving a single reader/writer
+to only a single client, you should instead just create a TCP listener
+and a TCP client and stream the data through using `io.Copy` which will
+adhere to buffers properly.
+
 ## Installation
 
 Standard `go get`:
