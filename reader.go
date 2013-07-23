@@ -39,6 +39,12 @@ func RegisterReader(server *rpc.Server, r io.Reader) error {
 	return server.Register(&ReaderServer{reader: r})
 }
 
+// RegisterReaderName registers the io.Reader on the RPC server with
+// the given type name instead of the default inferred type name.
+func RegisterReaderName(s *rpc.Server, name string, r io.Reader) error {
+	return s.RegisterName(name, &ReaderServer{reader: r})
+}
+
 func (r *Reader) Read(p []byte) (n int, err error) {
 	var result []byte
 	err = r.client.Call(r.typeName + ".Read", len(p), &result)
