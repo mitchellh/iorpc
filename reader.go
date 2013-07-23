@@ -8,7 +8,7 @@ import (
 // Reader is an implementation of io.Reader that performs its operations
 // across an RPC connection.
 type Reader struct {
-	client *rpc.Client
+	client   *rpc.Client
 	typeName string
 }
 
@@ -29,7 +29,7 @@ func NewReader(client *rpc.Client) *Reader {
 // RPC calls.
 func NewReaderName(client *rpc.Client, name string) *Reader {
 	return &Reader{
-		client: client,
+		client:   client,
 		typeName: name,
 	}
 }
@@ -47,7 +47,7 @@ func RegisterReaderName(s *rpc.Server, name string, r io.Reader) error {
 
 func (r *Reader) Read(p []byte) (n int, err error) {
 	var result []byte
-	err = r.client.Call(r.typeName + ".Read", len(p), &result)
+	err = r.client.Call(r.typeName+".Read", len(p), &result)
 	if err != nil {
 		if result != nil {
 			n = len(result)
